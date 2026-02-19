@@ -31,9 +31,17 @@ python3 bot.py 2026-01-18 > 18.md
 Requires Python 3.9+ and the packages in `requirements.txt`:
 
 ```bash
-pip install -r requirements.txt
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
 # or on Arch Linux:
 sudo pacman -S python-requests python-beautifulsoup4 python-lxml
+```
+
+Run with the venv python:
+
+```bash
+.venv/bin/python bot.py
+.venv/bin/python bot.py 2026-01-18
 ```
 
 ## Output format

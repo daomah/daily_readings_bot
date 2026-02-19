@@ -5,6 +5,7 @@ dist/
 build/
 .venv/
 venv/
+.env
 *.md
 !README.md
 !LICENSE
