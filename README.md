@@ -1,4 +1,4 @@
-# daily_saint_bot
+# daily_readings_bot
 
 Fetches the Orthodox Christian scripture readings for a given day and formats them as a single markdown file, ready for social media or personal notes.
 
