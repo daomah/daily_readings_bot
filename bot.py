@@ -25,6 +25,8 @@ BASE_OCA = "https://www.oca.org"
 ORTHOCAL_API = "https://orthocal.info/api/gregorian"
 
 LITURGICAL_TYPES = {"Matins Gospel", "Epistle", "Gospel"}
+# Reading types that only occur on Sundays (filtered out on weekdays)
+SUNDAY_ONLY_TYPES = {"Matins Gospel"}
 
 MONTHS = [
     "January", "February", "March", "April", "May", "June",
@@ -181,10 +183,11 @@ def get_oca_reading_page(year, month, day, index):
         parts = [p.strip() for p in paren_m.group(1).split(",", 1)]
         raw_type = parts[0] if parts else None
         occasion_abbrev = parts[1] if len(parts) > 1 else None
-        # Normalize types: "10th  Matins Gospel" → "Matins Gospel"
-        # Strip leading ordinals like "10th ", "11th ", etc.
+        # Normalize "10th  Matins Gospel" → "Matins Gospel".
+        # Only strip the ordinal when what follows is "Matins Gospel";
+        # preserve it for types like "6th Hour", "3rd Hour", "9th Hour".
         if raw_type:
-            reading_type = re.sub(r"^\d+\w+\s+", "", raw_type).strip()
+            reading_type = re.sub(r"^\d+\w+\s+(?=Matins Gospel)", "", raw_type).strip()
 
     dl = soup.find("dl", class_="reading")
     verse_parts = []
@@ -235,6 +238,14 @@ def build_occasion(
     4. Empty occasion → look up orthocal description for this reading,
        or fall back to day title from orthocal (e.g. "30th Thursday after Pentecost")
     """
+    # Normalize whitespace (OCA sometimes has "1st  reading" with double space)
+    if occasion_abbrev:
+        occasion_abbrev = re.sub(r"\s+", " ", occasion_abbrev).strip()
+
+    # Discard bare positional labels like "1st reading", "2nd reading"
+    if occasion_abbrev and re.fullmatch(r"\d+\w*\s+reading", occasion_abbrev, re.IGNORECASE):
+        occasion_abbrev = ""
+
     # ── 1. Weekday ordinal ──
     if occasion_abbrev and re.match(r"\d", occasion_abbrev):
         return f"the {occasion_abbrev}"
@@ -308,20 +319,20 @@ def format_markdown(today, readings, commemorations, orthocal_index, day_titles)
 
     is_sunday = today.weekday() == 6
 
-    # Matins Gospel only appears on Sundays liturgically
-    liturgical = [
+    # Include all reading types; Matins Gospel is Sunday-only
+    included = [
         r for r in readings
-        if r["type"] in LITURGICAL_TYPES
-        and not (r["type"] == "Matins Gospel" and not is_sunday)
+        if r["type"]
+        and not (r["type"] in SUNDAY_ONLY_TYPES and not is_sunday)
     ]
 
-    if not liturgical:
+    if not included:
         lines += [
-            "*No Liturgical readings (Epistle/Gospel) scheduled for this date.*",
+            "*No readings found for this date.*",
             "",
         ]
     else:
-        for r in liturgical:
+        for r in included:
             reading_url = f"oca.org/readings/daily/{date_path}/{r['index']}"
 
             # Matins Gospel heading has no occasion — it's self-explanatory
