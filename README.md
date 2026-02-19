@@ -7,11 +7,11 @@ Fetches the Orthodox Christian scripture readings for a given day and formats th
 For each day, the bot:
 
 1. Pulls the list of scripture readings from the OCA (Orthodox Church in America) website
-2. Fetches the NKJV text of each Epistle and Gospel reading (plus the Matins Gospel on Sundays)
+2. Fetches the NKJV text of every reading listed for that day — Epistle, Gospel, Vespers, Hours, and any other type OCA provides
 3. Resolves the full name of each feast or saint commemoration
 4. Outputs a markdown file with a linked title, a heading per reading that links back to the OCA page, the passage text as a blockquote, and a standard hashtag footer
 
-Days without a Divine Liturgy (e.g. weekdays in Great Lent or Cheesefare Week) produce a note indicating no liturgical readings are scheduled.
+The Matins Gospel is included on Sundays only, matching standard parish practice. All other reading types are included regardless of day.
 
 ## Usage
 
@@ -69,7 +69,7 @@ The primary source. For each day the bot:
   - The full passage text (NKJV) from the `<dl class="reading">` element
 - Scrapes the `<strong>`-tagged entries in the "Today's commemorated feasts and saints" section to get full feast and saint names (e.g. `Saint Basil the Great, Archbishop of Caesarea in Cappadocia`)
 
-Only `Epistle`, `Gospel`, and `Matins Gospel` readings are included in the output. `Matins Gospel` is further restricted to Sundays, matching standard parish practice.
+All reading types OCA lists are included in the output — `Epistle`, `Gospel`, `Vespers`, `6th Hour`, and others. `Matins Gospel` is restricted to Sundays, matching standard parish practice.
 
 ### orthocal.info API
 A secondary source, used to fill in occasion information that OCA's reading pages don't provide inline:
