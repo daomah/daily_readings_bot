@@ -83,3 +83,9 @@ A secondary source, used to fill in occasion information that OCA's reading page
 | OCA Scripture Readings | https://www.oca.org/readings/daily | Source of all reading text and URLs |
 | orthocal.info API | https://orthocal.info/api/gregorian/YYYY/M/D/ | Liturgical week titles and reading descriptions |
 | OCA Feasts and Saints | https://www.oca.org/saints/all-lives | Background on commemorated saints |
+
+## License and content notice
+
+The **code** in this repository is released under the [MIT License](LICENSE).
+
+The **output** produced by the bot contains scripture text from the New King James Version (NKJV), copyright © 1982 by Thomas Nelson. OCA displays this text under a courtesy arrangement with Thomas Nelson; that arrangement does not extend to redistribution of the generated files. The output is intended for personal devotional use.
