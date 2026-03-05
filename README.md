@@ -2,7 +2,7 @@
 
 Fetches the Orthodox Christian scripture readings for a given day and formats them as a single markdown file, ready for social media or personal notes.
 
-## What it does
+## 📋 What it does
 
 For each day, the bot:
 
@@ -13,7 +13,7 @@ For each day, the bot:
 
 The Matins Gospel is included on Sundays only, matching standard parish practice. All other reading types are included regardless of day.
 
-## Usage
+## 💻 Usage
 
 ```bash
 python3 bot.py              # today's date
@@ -44,7 +44,7 @@ Run with the venv python:
 .venv/bin/python bot.py 2026-01-18
 ```
 
-## Output format
+## 🗒️ Output format
 
 ```markdown
 # [Scripture Readings for Sunday, 18 January 2026 (OCA)](oca.org/readings/daily/2026/01/18)
@@ -64,7 +64,7 @@ Run with the venv python:
 #Christian #OrthodoxChristian #Bible #Scripture #Orthodox #Orthostr #Biblestr
 ```
 
-## How it works
+## ⚙️ How it works
 
 The bot combines two data sources:
 
@@ -92,7 +92,7 @@ A secondary source, used to fill in occasion information that OCA's reading page
 | orthocal.info API | https://orthocal.info/api/gregorian/YYYY/M/D/ | Liturgical week titles and reading descriptions |
 | OCA Feasts and Saints | https://www.oca.org/saints/all-lives | Background on commemorated saints |
 
-## License and content notice
+## 📄 License and content notice
 
 The **code** in this repository is released under the [MIT License](LICENSE).
 
