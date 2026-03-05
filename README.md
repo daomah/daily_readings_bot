@@ -1,4 +1,4 @@
-# daily_readings_bot
+# 📖 daily_readings_bot
 
 Fetches the Orthodox Christian scripture readings for a given day and formats them as a single markdown file, ready for social media or personal notes.
 
@@ -26,7 +26,7 @@ Output goes to stdout. Redirect to save:
 python3 bot.py 2026-01-18 > 18.md
 ```
 
-## Setup
+## ⚙️ Setup
 
 Requires Python 3.9+ and the packages in `requirements.txt`:
 
@@ -84,7 +84,7 @@ A secondary source, used to fill in occasion information that OCA's reading page
 - **Weekday ordinals** — when a reading has no feast occasion, the orthocal `titles` field supplies the liturgical week designation (e.g. `Thursday of the 30th week after Pentecost` → `the 30th Thursday after Pentecost`)
 - **Saint abbreviations** — when OCA's reading page lists only `Saint` as the occasion (without specifying which one), the orthocal `readings[].description` field identifies the saint (e.g. `St Basil`), which is then matched against the full OCA commemoration names
 
-## Resources
+## 📚 Resources
 
 | Resource | URL | Role |
 |---|---|---|
